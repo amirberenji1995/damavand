@@ -1,6 +1,6 @@
 # Damavand Documention - Signal Processing Module API Reference
 
-## ```signal_processing.Env(signals)```
+## ```env(signals)```
 
 
 ### Extracting the envelope of a set of signals
@@ -17,7 +17,7 @@
   to calculate the absolute magnitude, from both the imaginery and real parts.
 
 
-## ```FFT(signals, freq_filter = None, window = None)```
+## ```fft(signals, freq_filter = None, window = None)```
 
 ### Applying the Fast-Fourier Transform algorithim to derive frequency domain representation of a set of signals
   
@@ -33,7 +33,7 @@
   This function computes the Discrete Fourier Transform (DFT) of a set of signals, through the application of Fast-Fourier Transform ([```scipy.fft.fft```](https://docs.scipy.org/doc/scipy-1.11.0/reference/generated/scipy.fft.fft.html#scipy.fft.fft)) algorithm. As it returns only the coeeficients correpsonding to real frequency components (not the imaginery ones), lenght of the returned ```pandas.DataFrame``` is half of the inputted ```pandas.DataFrame```. ```freq_filter``` and ```window``` are not mandatory arguments and a function call without them is valid, however, we recommend using them to avoid aliasing (and of course near-zero/DC filtering through band-pass filters) and leakage error. We encourage you to use frequency axis for the sake of visualization; this can be done using either of the followings: [```scipy.fft.fftfreq```](https://docs.scipy.org/doc/scipy-1.11.0/reference/generated/scipy.fft.fftfreq.html#scipy.fft.fftfreq), [```numpy.linspace```](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html) and **damavand.utils.fft_freq_axis**.
 
 
-  ## ```ZoomedFFT(signals, f_min, f_max, desired_len, sampling_freq, freq_filter = None, window = None)```
+  ## ```zoomed_fft(signals, f_min, f_max, desired_len, sampling_freq, freq_filter = None, window = None)```
 
   ### Applying the ZoomFFT algorithm to derive a fine-grained frequency representation in a desired frequency range
 
@@ -50,10 +50,10 @@
   A ```pandas.DataFrame``` whose rows are the frequency representations of the inputted DataFrame, in the desired frequency range and with the chosen lenght.
 
   #### Descriptions:
-  This function enables one to derive a frequency represenationin a desired frequency range and with the desired length, through the application of [```sicpy.signal.ZoomFFT```](https://docs.scipy.org/doc/scipy-1.11.0/reference/generated/scipy.signal.ZoomFFT.html#scipy.signal.ZoomFFT). ```freq_filter``` and ```window``` are not mandatory arguments and a function call without them is valid, however, we recommend using them to avoid aliasing (and of course near-zero/DC filtering through band-pass filters) and leakage error. We encourage you to use frequency axis for the sake of visualization; this can be done using either of the followings: [```numpy.linspace```](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html) or ```damavand.utils.zoomedFFT_freq_axis```.
+  This function enables one to derive a frequency represenationin a desired frequency range and with the desired length, through the application of [```sicpy.signal.ZoomFFT```](https://docs.scipy.org/doc/scipy-1.11.0/reference/generated/scipy.signal.ZoomFFT.html#scipy.signal.ZoomFFT). ```freq_filter``` and ```window``` are not mandatory arguments and a function call without them is valid, however, we recommend using them to avoid aliasing (and of course near-zero/DC filtering through band-pass filters) and leakage error. We encourage you to use frequency axis for the sake of visualization; this can be done using either of the followings: [```numpy.linspace```](https://numpy.org/doc/stable/reference/generated/numpy.linspace.html) or ```damavand.utils.zoomed_fft_freq_axis```.
 
 
-  ## ```STFT(signals, window_len, hop_len, freq_filter = None, window = None)```
+  ## ```stft(signals, window_len, hop_len, freq_filter = None, window = None)```
 
   ### Application of Short-Time Fourier Transform to derive Time-Frequency representation of the inputted signals
 

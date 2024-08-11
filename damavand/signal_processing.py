@@ -5,7 +5,7 @@ from utils import *
 
 def env(signals):
   """
-  Env(signals) - Extracting the envelope of a set of signals
+  env(signals) - Extracting the envelope of a set of signals
   
   Arguments:
   signals -- A pd.DataFrame() incuding signals in its rows.
@@ -23,7 +23,7 @@ def env(signals):
 
 def fft(signals, freq_filter = None, window = None):
   """
-  FFT(signals, freq_filter, window) - Applying the Fast-Fourier Transform algorithim to derive frequency domain representation of a set of signals
+  fft(signals, freq_filter, window) - Applying the Fast-Fourier Transform algorithim to derive frequency domain representation of a set of signals
   
   Arguemnts:
   Signals -- A pd.DataFrame() incuding signals in its rows.
@@ -97,7 +97,7 @@ def stft(signals, window_len, hop_len, freq_filter = None, window = None):
   Return Value:
   A np.array(), whose first dimension equals the number of rows included in the input pd.DataFrame; it includes derived Time-Frequency representations of the inputted signals. freq_filter and window are not mandatory 
   arguments and a function call without them is valid, however, we recommend using them to avoid aliasing (and of course near-zero/DC filtering through band-pass filters) and leakage error. Pay attention that unlike
-  the case of damavand.signal_processing.FFT() or damavand.signal_processing.ZoomedFFT(), for this function you have to define freq_filter and window objects with a lenght that suits the segmented signals (equal to
+  the case of damavand.signal_processing.fft() or damavand.signal_processing.zoomed_fft(), for this function you have to define freq_filter and window objects with a lenght that suits the segmented signals (equal to
   the window_len argument), instead of the original signals, presented in the inputted pd.DataFrame().
 
   Descriptions:

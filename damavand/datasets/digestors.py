@@ -197,7 +197,7 @@ class MUET():
 
     self.data = {key: [] for key in self.channels}
 
-  def mine(self, win_len, hop_len):
+  def mine(self, mining_params):
     for folder in self.folders:
       if folder.startswith('Healthy'):
         state = 'healthy'
@@ -207,7 +207,7 @@ class MUET():
             load = file.split(' ')[1] + ' ' + file.split(' ')[1].split('.')[0]
             df = pd.read_csv(self.base_dir + folder + '/' + file)
             for i in self.data.keys():
-              temp_df = splitter(df.iloc[:, i].to_numpy(), win_len, hop_len)
+              temp_df = splitter(df.iloc[:, i].to_numpy(), mining_params['win_len'], mining_params['hop_len'])
               temp_df['state'], temp_df['severity'], temp_df['load'] = state, severity, load
               self.data[i].append(temp_df)
       else:
@@ -215,7 +215,7 @@ class MUET():
           if file.endswith('.csv'):
             df = pd.read_csv(self.base_dir + folder + '/' + file)
             for i in self.data.keys():
-              temp_df = splitter(df.iloc[:, i].to_numpy(), win_len, hop_len)
+              temp_df = splitter(df.iloc[:, i].to_numpy(), mining_params['win_len'], mining_params['hop_len'])
               severity = folder.split('-')[0]
               state =''.join(list(file.split('-')[0])[3:])
               load = file.split('-')[1].split('.')[0]
@@ -230,7 +230,7 @@ class UoO():
 
     self.data = {key: [] for key in self.channels}
 
-  def mine(self, win_len, hop_len):
+  def mine(self, mining_params):
     for file in os.listdir(self.base_dir):
       if file.endswith('.mat'):
         rep = int(file.split('.')[0].split('-')[-1])
@@ -239,7 +239,7 @@ class UoO():
           loading = file.split('.')[0].split('-')[:-1][1]
           mat_data = sio.loadmat(self.base_dir + file)
           for channel in self.data.keys():
-            temp_df = splitter(mat_data[channel].reshape((-1)), win_len, hop_len)
+            temp_df = splitter(mat_data[channel].reshape((-1)), mining_params['win_len'], mining_params['hop_len'])
             temp_df['state'], temp_df['loading'], temp_df['rep'] = state, loading, rep
             self.data[channel].append(temp_df)
 
@@ -252,7 +252,7 @@ class PU():
     self.reps = reps
     self.data = {key: [] for key in self.channels}
 
-  def mine(self, win_len, hop_len):
+  def mine(self, mining_params):
     self.corrupted_files = {}
     for folder in self.folders:
       for file in os.listdir(self.base_directory + folder):
@@ -263,7 +263,7 @@ class PU():
               mat_data = sio.loadmat(self.base_directory + folder + '/' + file)
 
               if 'CP1' in self.channels:
-                temp_df = splitter(mat_data[file.split('.')[0]]['Y'][0][0][0][1][2].reshape((-1)), win_len, hop_len)
+                temp_df = splitter(mat_data[file.split('.')[0]]['Y'][0][0][0][1][2].reshape((-1)), mining_params['win_len'], mining_params['hop_len'])
                 temp_df['rot_speed'] = rot_speed
                 temp_df['load_torque'] = load_torque
                 temp_df['radial_force'] = radial_force
@@ -272,7 +272,7 @@ class PU():
                 self.data['CP1'].append(temp_df)
 
               if 'CP2' in self.channels:
-                temp_df = splitter(mat_data[file.split('.')[0]]['Y'][0][0][0][2][2].reshape((-1)), win_len, hop_len)
+                temp_df = splitter(mat_data[file.split('.')[0]]['Y'][0][0][0][2][2].reshape((-1)), mining_params['win_len'], mining_params['hop_len'])
                 temp_df['rot_speed'] = rot_speed
                 temp_df['load_torque'] = load_torque
                 temp_df['radial_force'] = radial_force
@@ -281,7 +281,7 @@ class PU():
                 self.data['CP2'].append(temp_df)
 
               if 'Vib' in self.channels:
-                temp_df = splitter(mat_data[file.split('.')[0]]['Y'][0][0][0][6][2].reshape((-1)), win_len, hop_len)
+                temp_df = splitter(mat_data[file.split('.')[0]]['Y'][0][0][0][6][2].reshape((-1)), mining_params['win_len'], mining_params['hop_len'])
                 temp_df['rot_speed'] = rot_speed
                 temp_df['load_torque'] = load_torque
                 temp_df['radial_force'] = radial_force

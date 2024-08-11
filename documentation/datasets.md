@@ -232,7 +232,7 @@ cwru.mine(mining_params, synchronous_only = True)
 - ```base_directory```: Home directory of the downloaded files.
 - ```channels```: List of integers (from 0 to 7), corresponding to 8 accelerometers. Default value is [0, 1, 2, 3, 4, 5, 6, 7].
 
-#### Mining: ```CWRU.mine(mining_params)```
+#### Mining: ```SEU.mine(mining_params)```
 - ```mining_params```: a python dictonary whose keys are ```win_len``` and ```hop_len```. 
 
 #### Accessing data: ```SEU.data```
@@ -259,10 +259,10 @@ seu.mine(mining_params)
 - ```folders```:Folders to include during the mining process.
 - ```channels```: List of integers (from 0 to 7), corresponding to the tachometer, 3 accelerometers on the underhang bearing (axial, radial and tangential), 3 accelerometers on the overhang bearing (axial, radial and tangential) and a microphone.
 
-#### Mining: ```CWRU.mine(mining_params)```
+#### Mining: ```MaFaulda.mine(mining_params)```
 - ```mining_params```: a python dictonary whose keys are ```win_len``` and ```hop_len```. 
 
-#### Accessing data: ```SEU.data```
+#### Accessing data: ```MaFaulda.data```
 Mined data is organized as a python dictonary whose keys are elements of the ```channels```; corresponding values are lists of ```pd.DataFrame``` objects.
 
 #### Usage example:
@@ -275,6 +275,85 @@ mafaulda.mine(50000, 50000)
 
 ### ```MEUT```
 
+#### Original title: Triaxial bearing vibration dataset of induction motor under varying load conditions
+
+#### External resources:
+- https://data.mendeley.com/datasets/fm6xzxnf36/2
+- https://www.sciencedirect.com/science/article/pii/S2352340922005170
+
+#### Instantiation: ```MUET(base_directory, folders, channels)```
+
+- ```base_directory```: Home directory of the extracted folders.
+- ```folders```:Folders to include during the mining process.
+- ```channels```: List of integers, corresponding to the triaxial acceleration signals; 1, 2 and 3 correspond to X-axis, Y-axis, and Z-axis.
+
+#### Mining: ```MUET.mine(mining_params)```
+- ```mining_params```: a python dictonary whose keys are ```win_len``` and ```hop_len```. 
+
+#### Accessing data: ```MUET.data```
+Mined data is organized as a python dictonary whose keys are elements of the ```channels```; corresponding values are lists of ```pd.DataFrame``` objects.
+
+#### Usage example:
+
+```
+mining_params = {'win_len': 50000, 'hop_len': 50000}
+meut = MEUT('fm6xzxnf36-2/', os.listdir('fm6xzxnf36-2/'), channels = [2])
+mafaulda.mine(10000, 5000)
+```
+
 ### ```UoO```
 
+#### Original title: Bearing vibration data collected under time-varying rotational speed conditions
+
+#### External resources:
+- https://www.sciencedirect.com/science/article/pii/S2352340918314124
+- https://data.mendeley.com/datasets/v43hmbwxpm/1
+
+#### Instantiation: ```UoO(base_directory, channels, reps)```
+
+- ```base_directory```: Home directory of the extracted folders.
+- ```channels```: List of strings, specifying to the desired channels; available choices are 'channel_1' and 'channel_2', corresponding to the acceleration and the rotational speed. Default value is ['channel_1', 'channel_2'].
+- ```reps```: To enrich the dataset, measurements are repeated three times. ```reps``` is a list that specifies the number of repetitions (1, 2 and 3), to include. Default value is [1, 2, 3].
+
+#### Mining: ```UoO.mine(mining_params)```
+- ```mining_params```: a python dictonary whose keys are ```win_len``` and ```hop_len```. 
+
+#### Accessing data: ```UoO.data```
+Mined data is organized as a python dictonary whose keys are elements of the ```channels```; corresponding values are lists of ```pd.DataFrame``` objects.
+
+#### Usage example:
+
+```
+mining_params = {'win_len': 50000, 'hop_len': 50000}
+uoo = UoO('UoO/', channels = ['Channel_1', 'Channel_2'], reps = list(range(1,4)))
+uoo.mine(10000, 10000)
+```
+
 ### ```PU```
+
+#### Original title: Bearing vibration data collected under time-varying rotational speed conditions
+
+#### External resources:
+- https://www.papers.phmsociety.org/index.php/phme/article/view/1577
+- https://mb.uni-paderborn.de/kat/forschung/kat-datacenter/bearing-datacenter/data-sets-and-download
+
+#### Instantiation: ```PU(base_directory, folders, channels, reps)```
+
+- ```base_directory```: Home directory of the extracted folders.
+- ```folders```: List of the extracted folders, to include.
+- ```channels```: List of strings, specifying to the desired channels; available choices are 'CP1', 'CP2' and 'Vib' corresponding to the current phases (1 and 2) and acceleration. Default value is ['CP1', 'CP2', 'Vib'].
+- ```reps```: To enrich the dataset, measurements are repeated twenty times. ```reps``` is a list that specifies the number of repetitions (1, 2 and 3), to include. Default value is [1, 2, 3, ... , 19, 20].
+
+#### Mining: ```PU.mine(mining_params)```
+- ```mining_params```: a python dictonary whose keys are ```win_len``` and ```hop_len```. 
+
+#### Accessing data: ```PU.data```
+Mined data is organized as a python dictonary whose keys are elements of the ```channels```; corresponding values are lists of ```pd.DataFrame``` objects.
+
+#### Usage example:
+
+```
+mining_params = {'win_len': 50000, 'hop_len': 50000}
+pu = PU('PU/', os.listdir('PU/), channels = ['CP1', 'CP2', 'Vib'], reps = list(range(0,5)))
+pu.mine(10000, 10000)
+```

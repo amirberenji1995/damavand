@@ -18,7 +18,7 @@ def splitter(array, win_len, hop_len, return_df = True):
 def fft_freq_axis(time_len, sampling_freq):
    return scipy.fft.fftfreq(time_len, 1/float(sampling_freq))[0 : time_len // 2]
 
-def zoomedFFT_freq_axis(f_min, f_max, desired_len):
+def zoomed_fft_freq_axis(f_min, f_max, desired_len):
    return np.linspace(f_min, f_max, desired_len)
 
 def rms(arr):

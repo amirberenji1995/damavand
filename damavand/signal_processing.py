@@ -3,7 +3,7 @@ import scipy
 import numpy as np
 from utils import *
 
-def Env(signals):
+def env(signals):
   """
   Env(signals) - Extracting the envelope of a set of signals
   
@@ -21,7 +21,7 @@ def Env(signals):
 
   return pd.DataFrame(np.abs(scipy.signal.hilbert(signals)))
 
-def FFT(signals, freq_filter = None, window = None):
+def fft(signals, freq_filter = None, window = None):
   """
   FFT(signals, freq_filter, window) - Applying the Fast-Fourier Transform algorithim to derive frequency domain representation of a set of signals
   
@@ -50,7 +50,7 @@ def FFT(signals, freq_filter = None, window = None):
   return pd.DataFrame(2.0/signals.shape[1] * np.abs(scipy.fft.fft(signals)[:, 0:signals.shape[1]//2]))
 
 
-def ZoomedFFT(signals, f_min, f_max, desired_len, sampling_freq, freq_filter = None, window = None):
+def zoomed_fft(signals, f_min, f_max, desired_len, sampling_freq, freq_filter = None, window = None):
   """
   ZoomedFFT(signals, time_len, f_min, f_max, desired_len, sampling_freq, freq_filter, window) - Applying the ZoomFFT algorithm to derive a fine-grained frequency representation
   in a desired frequency range
@@ -83,7 +83,7 @@ def ZoomedFFT(signals, f_min, f_max, desired_len, sampling_freq, freq_filter = N
 
   return pd.DataFrame((2/signals.shape[1]) * np.abs(transform(signals)))
 
-def STFT(signals, window_len, hop_len, freq_filter = None, window = None):
+def stft(signals, window_len, hop_len, freq_filter = None, window = None):
   """
   STFT(signals, window_len, hop_len, freq_filter = None, window = None) - Application of Short-Time Fourier Transform to derive Time-Frequency representation of the inputted signals
 

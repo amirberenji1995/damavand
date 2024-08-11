@@ -136,12 +136,12 @@ PuDownloader(addresses['MaFaulDa']).download_extract('MaFaulDa_zipfiles', 'MaFau
 
 #### Instantiation: ```KAIST(base_directory, files, channels)```
 
-- ```base_directory```: Home directory of the extracted files.
-- ```files```: List of files of interest; to include all the files, use ```os.listdir(base_directory)```
-- ```channels```: List of channels to include; 0, 1, 2 and 3 correspond to x direction - housing A, y direction - housing A, x direction - housing B and y direction - housing B, respectively. Default value is [0, 1, 2, 3].
+- ```base_directory``` is the home directory of the extracted files.
+- ```files``` is the list of files of interest; to include all files, use ```os.listdir(base_directory)```
+- ```channels```is the ist of channels to include; 0, 1, 2 and 3 correspond to x direction - housing A, y direction - housing A, x direction - housing B and y direction - housing B, respectively. Default value is [0, 1, 2, 3].
 
 #### Mining: ```KAIST.mine(mining_params)```
-- ```mining_params```: a python dictonary whose keys are ```win_len``` and ```hop_len``` with their correponding values.
+- ```mining_params``` is a python dictonary whose keys are ```win_len``` and ```hop_len``` with their correponding values.
 
 #### Accessing data: ```KAIST.data```
 Mined data is presented as a python dictonary whose keys correspond to the ```channels``` and values are list of ```pd.DataFrame``` objects.
@@ -164,11 +164,11 @@ kaist.mine(win_len, hop_len)
 
 #### Instantiation: ```MFPT(base_directory, folders)```
 
-- ```base_directory```: Home directory of the extracted folder.
-- ```folders```: List of folders to include; valid elements are *1 - Three Baseline Conditions*, *2 - Three Outer Race Fault Conditions*, *3 - Seven More Outer Race Fault Conditions* and *4 - Seven Inner Race Fault Conditions*.
+- ```base_directory``` is the home directory of the extracted file.
+- ```folders``` is the list of folders to include; valid elements are *1 - Three Baseline Conditions*, *2 - Three Outer Race Fault Conditions*, *3 - Seven More Outer Race Fault Conditions* and *4 - Seven Inner Race Fault Conditions*.
 
 #### Mining: ```MFPT.mine(mining_params)```
-- ```mining_params```: a nested python dictonary whose keys are 97656 and 48828 (sampling frequencies the dataset is collected by) and the corresponding values are objects of python dictonary. Secondary dictonaries each have two keys: ```win_len``` and ```hop_len``` with correponding values.
+- ```mining_params``` is a nested python dictonary whose keys are 97656 and 48828 (sampling frequencies the dataset is collected by) and the corresponding values are objects of python dictonary. Secondary dictonaries each have two keys: ```win_len``` and ```hop_len``` with correponding values.
 
 #### Accessing data: ```MFPT.data```
 Mined data is presented as a python dictonary whose keys are 97656 and 48828. Corresponding values are lists of ```pd.DataFrame``` objects, belonging to the data files recorded to the corresponding sampling frequency.
@@ -196,11 +196,11 @@ mfpt.mine({'97656': 16000, '48828': 8000}, {'97656': 4000, '48828': 2000})
 
 #### Instantiation: ```CWRU(base_directory, channels)```
 
-- ```base_directory```: Home directory of the downloaded files.
-- ```channels```: List of strings to include the desired measurement channels; 'FE' and 'DE' corresponding to fan-end acceleration, drive-end acceleration and base acceleration respectively, are available choices. Default value is ['FE', 'DE'].
+- ```base_directory``` is the home directory of the downloaded files.
+- ```channels``` is a list of strings to include the desired measurement channels; 'FE' and 'DE' corresponding to fan-end acceleration, drive-end acceleration and base acceleration respectively, are available choices. Default value is ['FE', 'DE'].
 
 #### Mining: ```CWRU.mine(mining_params, synchronous_only)```
-- ```mining_params```: a nested python dictonary whose keys are '12K' and '48K' (sampling frequencies used to collect the dataset) and values are again python dictionaries whose keys are ```win_len``` and ```hop_len```.
+- ```mining_params``` is a nested python dictonary whose keys are '12K' and '48K' (sampling frequencies used to collect the dataset) and values are again python dictionaries whose keys are ```win_len``` and ```hop_len```.
 - ```synchronous_only``` is a boolean variable to be used as a flag; once this flag is set ```True```, only files which contain all the desired channels are mined and ones missing one of the channels are skipped. Default value is ```False```.
 
 #### Accessing data: ```CWRU.data```
@@ -229,11 +229,11 @@ cwru.mine(mining_params, synchronous_only = True)
 
 #### Instantiation: ```SEU(base_directory, channels)```
 
-- ```base_directory```: Home directory of the downloaded files.
-- ```channels```: List of integers (from 0 to 7), corresponding to 8 accelerometers. Default value is [0, 1, 2, 3, 4, 5, 6, 7].
+- ```base_directory``` is the home directory of the downloaded files.
+- ```channels``` is a list of integers (from 0 to 7), corresponding to 8 accelerometers. Default value is [0, 1, 2, 3, 4, 5, 6, 7].
 
 #### Mining: ```SEU.mine(mining_params)```
-- ```mining_params```: a python dictonary whose keys are ```win_len``` and ```hop_len```. 
+- ```mining_params``` is a python dictonary whose keys are ```win_len``` and ```hop_len```. 
 
 #### Accessing data: ```SEU.data```
 Mined data is organized as a python dictonary whose keys are elements of the ```channels```; corresponding values are lists of ```pd.DataFrame``` objects.
@@ -255,12 +255,12 @@ seu.mine(mining_params)
 
 #### Instantiation: ```MaFauldDa(base_directory, folders, channels)```
 
-- ```base_directory```: Home directory of the extracted folders.
-- ```folders```:Folders to include during the mining process.
-- ```channels```: List of integers (from 0 to 7), corresponding to the tachometer, 3 accelerometers on the underhang bearing (axial, radial and tangential), 3 accelerometers on the overhang bearing (axial, radial and tangential) and a microphone.
+- ```base_directory``` is the home directory of the extracted folders.
+- ```folders``` is a list to include folders of interest, during the mining process.
+- ```channels``` is a list of integers (from 0 to 7), corresponding to the tachometer, 3 accelerometers on the underhang bearing (axial, radial and tangential), 3 accelerometers on the overhang bearing (axial, radial and tangential) and a microphone.
 
 #### Mining: ```MaFaulda.mine(mining_params)```
-- ```mining_params```: a python dictonary whose keys are ```win_len``` and ```hop_len```. 
+- ```mining_params``` is a python dictonary whose keys are ```win_len``` and ```hop_len```. 
 
 #### Accessing data: ```MaFaulda.data```
 Mined data is organized as a python dictonary whose keys are elements of the ```channels```; corresponding values are lists of ```pd.DataFrame``` objects.
@@ -283,12 +283,12 @@ mafaulda.mine(50000, 50000)
 
 #### Instantiation: ```MUET(base_directory, folders, channels)```
 
-- ```base_directory```: Home directory of the extracted folders.
-- ```folders```:Folders to include during the mining process.
-- ```channels```: List of integers, corresponding to the triaxial acceleration signals; 1, 2 and 3 correspond to X-axis, Y-axis, and Z-axis.
+- ```base_directory``` is the home directory of the extracted folders.
+- ```folders``` is the list of folders to include during the mining process.
+- ```channels```is the list of integers, corresponding to the triaxial acceleration signals; 1, 2 and 3 correspond to X-axis, Y-axis, and Z-axis. The default value is [1, 2, 3].
 
 #### Mining: ```MUET.mine(mining_params)```
-- ```mining_params```: a python dictonary whose keys are ```win_len``` and ```hop_len```. 
+- ```mining_params``` is a python dictonary whose keys are ```win_len``` and ```hop_len```. 
 
 #### Accessing data: ```MUET.data```
 Mined data is organized as a python dictonary whose keys are elements of the ```channels```; corresponding values are lists of ```pd.DataFrame``` objects.
@@ -311,12 +311,12 @@ mafaulda.mine(10000, 5000)
 
 #### Instantiation: ```UoO(base_directory, channels, reps)```
 
-- ```base_directory```: Home directory of the extracted folders.
-- ```channels```: List of strings, specifying to the desired channels; available choices are 'channel_1' and 'channel_2', corresponding to the acceleration and the rotational speed. Default value is ['channel_1', 'channel_2'].
-- ```reps```: To enrich the dataset, measurements are repeated three times. ```reps``` is a list that specifies the number of repetitions (1, 2 and 3), to include. Default value is [1, 2, 3].
+- ```base_directory``` is the home directory of the extracted folders.
+- ```channels``` is a list of strings, specifying the desired channels; available choices are 'channel_1' and 'channel_2', corresponding to the acceleration and the rotational speed, respectively. The default value is ['channel_1', 'channel_2'].
+- ```reps``` is a list of integers that specifies the number of measurement repetitions (1, 2 and 3), to include. Default value is [1, 2, 3].
 
 #### Mining: ```UoO.mine(mining_params)```
-- ```mining_params```: a python dictonary whose keys are ```win_len``` and ```hop_len```. 
+- ```mining_params``` is a python dictonary whose keys are ```win_len``` and ```hop_len```. 
 
 #### Accessing data: ```UoO.data```
 Mined data is organized as a python dictonary whose keys are elements of the ```channels```; corresponding values are lists of ```pd.DataFrame``` objects.
@@ -339,13 +339,13 @@ uoo.mine(10000, 10000)
 
 #### Instantiation: ```PU(base_directory, folders, channels, reps)```
 
-- ```base_directory```: Home directory of the extracted folders.
-- ```folders```: List of the extracted folders, to include.
-- ```channels```: List of strings, specifying to the desired channels; available choices are 'CP1', 'CP2' and 'Vib' corresponding to the current phases (1 and 2) and acceleration. Default value is ['CP1', 'CP2', 'Vib'].
-- ```reps```: To enrich the dataset, measurements are repeated twenty times. ```reps``` is a list that specifies the number of repetitions (1, 2 and 3), to include. Default value is [1, 2, 3, ... , 19, 20].
+- ```base_directory``` is the home directory of the extracted folders.
+- ```folders``` is the list of the extracted folders, to include.
+- ```channels``` is the ist of strings, specifying the desired channels; available choices are 'CP1', 'CP2' and 'Vib' corresponding to the current phases (1 and 2) and acceleration. The default value is ['CP1', 'CP2', 'Vib'].
+- ```reps``` is a list of integers that specifies the number of repetitions (from 1 to 20), to include. The default value is [1, 2, 3, ... , 19, 20].
 
 #### Mining: ```PU.mine(mining_params)```
-- ```mining_params```: a python dictonary whose keys are ```win_len``` and ```hop_len```. 
+- ```mining_params``` is a python dictonary whose keys are ```win_len``` and ```hop_len```. 
 
 #### Accessing data: ```PU.data```
 Mined data is organized as a python dictonary whose keys are elements of the ```channels```; corresponding values are lists of ```pd.DataFrame``` objects.

@@ -1,7 +1,7 @@
 import pandas as pd
 import scipy
 import numpy as np
-from utils import *
+from damavand.damavand.utils import *
 
 def env(signals):
   """

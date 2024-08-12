@@ -6,7 +6,7 @@ from zipfile import ZipFile
 from rarfile import RarFile
 
 def read_addresses():
-   with open('damvand/damavand/datasets/addresses.json', 'r') as f:
+   with open('damavand/damavand/datasets/addresses.json', 'r') as f:
       data = json.load(f)
    return data
 

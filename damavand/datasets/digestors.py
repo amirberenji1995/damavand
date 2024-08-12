@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import scipy.io as sio
 import gc
-from utils import *
+from damavand.damavand.utils import *
 
 class KAIST:
   def __init__(self, base_directory, files, channels = list(range(4))):

@@ -255,12 +255,12 @@ class PU():
   def mine(self, mining_params):
     self.corrupted_files = {}
     for folder in self.folders:
-      for file in os.listdir(self.base_directory + folder):
+      for file in os.listdir(self.base_dir + folder):
         if file.endswith('.mat'):
           if int(file.split('.')[0].split('_')[-1]) in self.reps:
             rot_speed, load_torque, radial_force, code, rep = file.split('.')[0].split('_')
             try:
-              mat_data = sio.loadmat(self.base_directory + folder + '/' + file)
+              mat_data = sio.loadmat(self.base_dir + folder + '/' + file)
 
               if 'CP1' in self.channels:
                 temp_df = splitter(mat_data[file.split('.')[0]]['Y'][0][0][0][1][2].reshape((-1)), mining_params['win_len'], mining_params['hop_len'])
@@ -289,5 +289,5 @@ class PU():
                 temp_df['rep'] = rep
                 self.data['Vib'].append(temp_df)
             except Exception as e:
-              self.corrupted_files[self.base_directory + folder + '/' + file] = e
+              self.corrupted_files[self.base_dir + folder + '/' + file] = e
 

@@ -180,9 +180,9 @@ class MaFauldDa:
       
       else:
         state = folder
-        for sev in os.listdir(self.base_directory + folder + '/'):
-          for file in os.listdir(self.base_directory + folder + '/' + sev):
-            df = pd.read_csv(self.base_directory + folder + '/' + sev + '/' + file, header = None)
+        for sev in os.listdir(self.base_dir + folder + '/'):
+          for file in os.listdir(self.base_dir + folder + '/' + sev):
+            df = pd.read_csv(self.base_dir + folder + '/' + sev + '/' + file, header = None)
             for key in self.data.keys():
               temp_df = splitter(df[key].values, mining_params['win_len'], mining_params['hop_len'])
               temp_df['state'] = state

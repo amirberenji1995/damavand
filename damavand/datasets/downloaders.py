@@ -104,7 +104,7 @@ class PuDownloader():
     if not os.path.exists(self.download_path):
       os.mkdir(self.download_path)
     for key in self.files.keys():
-      for subkey in self.files[key]:
+      for subkey in self.files[key].keys():
         print('Downloading: ', subkey)
         r = requests.get(self.files[key][subkey], stream = True, timeout=timeout)
         with open(self.download_path + subkey, 'wb') as f:

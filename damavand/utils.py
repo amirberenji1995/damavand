@@ -6,7 +6,7 @@ def splitter(array, win_len, hop_len, return_df = True):
    N = array.shape[0]
    m = 0
    ids = []
-   while m + win_len < N:
+   while m + win_len <= N:
       ids.append([m, m + win_len])
       m = m + hop_len
       

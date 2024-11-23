@@ -114,21 +114,36 @@ def stft(signals, window_len, hop_len, freq_filter = None, window = None):
 
   return 2.0/splitted_signals.shape[2] * np.abs(scipy.fft.fft(splitted_signals)[:, :, 0:splitted_signals.shape[2]//2])
 
-def feature(signals, features):
-  """
-  feature(signals, features) - Extracting a number of features from the inpuuted signals
+def extract_features(signals, features):
+    """
+    extract_features(signals, features) - Extracting features from input signals
 
-  Arguments:
-  signals -- A pd.DataFrame() incuding signals in its rows.
-  features -- A python dict including the features of interest and corresponding column labels of them.
+    Arguments:
+    signals -- A pd.DataFrame() including signals in its rows
+    features -- A python dict where:
+                - keys are feature names
+                - values are tuples of (function, args, kwargs) where:
+                  * function: the feature extraction function
+                  * args: tuple of positional arguments (optional)
+                  * kwargs: dict of keyword arguments (optional)
+                Example: {
+                    'feature1': (func1, (), {}),
+                    'feature2': (func2, (arg1,), {'param1': value1}),
+                }
 
-  Return Value:
-  A pd.DataFrame(), including the feature values for the signals in the inputted pd.DataFrame().
+    Return Value:
+    A pd.DataFrame() containing the feature values for each signal
+    """
+    def apply_feature(row, func_tuple):
+        func, args, kwargs = func_tuple
+        return func(row, *args, **kwargs)
 
-  Description:
-  To extract a set of features from the signals presented in a pd.DataFrame, one can use this function. Features of interest are supposed to be passed as a python dict (to have the returned df with desired column lables) including python functions. 
-  """
-  feature_values = signals.apply(lambda row: pd.Series([feature(row) for feature in features.values()]), axis=1)
-  feature_values.columns = features.keys()
-
-  return feature_values
+    feature_values = signals.apply(
+        lambda row: pd.Series([
+            apply_feature(row, feat_info) for feat_info in features.values()
+        ]),
+        axis=1
+    )
+    feature_values.columns = features.keys()
+    
+    return feature_values

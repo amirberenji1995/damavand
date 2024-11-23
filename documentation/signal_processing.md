@@ -71,16 +71,34 @@
   By the application of this function, one is able to derive Time-Frequency representation; this is done by first segmenting the original signals to a series of shorter signals and consecutively [**FFT**](https://docs.scipy.org/doc/scipy-1.11.0/reference/generated/scipy.fft.fft.html#scipy.fft.fft) is applied on each
   segmented signal to derive the corresponding frequency representation. Results are usually visualized as heatmaps.
 
-## ```feature(signals, features)```
+## ```extract_features(signals, features)```
 
 ### Extracting a number of features from the inpuuted signals
 
 #### Arguments:
 - **signals**: A ```pandas.DataFrame``` incuding signals in its rows.
-- **features**: A python ```dict``` including the features of interest and corresponding column labels of them.
+- **features**: A python ```dict``` where:
+  - keys are feature names
+  - values are tuples of (function, args, kwargs) where:
+    * function: the feature extraction function
+    * args: tuple of positional arguments (optional)
+    * kwargs: dict of keyword arguments (optional)
 
 #### Return Value:
 A ```pandas.DataFrame```, including the feature values for the signals in the inputted ```pandas.DataFrame```.
 
 #### Description:
-To extract a set of features from the signals presented in a ```pandas.DataFrame```, one can use this function. Features of interest are supposed to be passed as a python ```dict``` whose keys and values are desired label and corresponding python ```functions```. 
+To extract a set of features from the signals presented in a ```pandas.DataFrame```, one can use this function. Features of interest are supposed to be passed as a python ```dict``` where:
+  - keys are feature names
+  - values are tuples of (function, args, kwargs) where:
+
+    - function: the feature extraction function
+    - args: tuple of positional arguments (optional)
+    - kwargs: dict of keyword arguments (optional)
+                  
+Example:
+
+{
+                    'feature1': (func1, (), {}),
+                    'feature2': (func2, (arg1,), {'param1': value1}),
+                }

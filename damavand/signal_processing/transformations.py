@@ -113,37 +113,3 @@ def stft(signals, window_len, hop_len, freq_filter = None, window = None):
     splitted_signals = splitted_signals * window
 
   return 2.0/splitted_signals.shape[2] * np.abs(scipy.fft.fft(splitted_signals)[:, :, 0:splitted_signals.shape[2]//2])
-
-def extract_features(signals, features):
-    """
-    extract_features(signals, features) - Extracting features from input signals
-
-    Arguments:
-    signals -- A pd.DataFrame() including signals in its rows
-    features -- A python dict where:
-                - keys are feature names
-                - values are tuples of (function, args, kwargs) where:
-                  * function: the feature extraction function
-                  * args: tuple of positional arguments (optional)
-                  * kwargs: dict of keyword arguments (optional)
-                Example: {
-                    'feature1': (func1, (), {}),
-                    'feature2': (func2, (arg1,), {'param1': value1}),
-                }
-
-    Return Value:
-    A pd.DataFrame() containing the feature values for each signal
-    """
-    def apply_feature(row, func_tuple):
-        func, args, kwargs = func_tuple
-        return func(row, *args, **kwargs)
-
-    feature_values = signals.apply(
-        lambda row: pd.Series([
-            apply_feature(row, feat_info) for feat_info in features.values()
-        ]),
-        axis=1
-    )
-    feature_values.columns = features.keys()
-    
-    return feature_values

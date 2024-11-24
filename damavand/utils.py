@@ -20,6 +20,3 @@ def fft_freq_axis(time_len, sampling_freq):
 
 def zoomed_fft_freq_axis(f_min, f_max, desired_len):
    return np.linspace(f_min, f_max, desired_len)
-
-def rms(arr):
-  return np.sqrt(np.mean(np.square(arr)))

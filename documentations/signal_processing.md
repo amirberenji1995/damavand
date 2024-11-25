@@ -100,29 +100,100 @@ To extract a set of features from the signals presented in a ```pandas.DataFrame
     - args: tuple of positional arguments (optional)
     - kwargs: dict of keyword arguments (optional)
 
-| **Number** |                                               **Formula**                                              |                **Description**               |                               **Implementation**                              | **Example** |
-|:----------:|:------------------------------------------------------------------------------------------------------:|:--------------------------------------------:|:-----------------------------------------------------------------------------:|-------------|
-|     P1     |                                  $P_1 = \frac{\sum_{n=1}^{N} x(n)}{N}$                                 |                    TS Mean                   |                                 ```np.mean```                                 |             |
-|     P2     |                         $P_2 = \sqrt{\frac{\sum_{n=1}^{N} (x(n)-P_1)^2}{N-1}}$                         |             TS Standard Deviation            |                                  ```np.std```                                 |             |
-|     P3     |                    $P_3 = \left(\frac{\sum_{n=1}^{N} \sqrt{\|x(n)\|}}{N}\right)^{2}$                   | TS Squared Mean of Square Roots of Absolutes |       ```damavand.damavand.signal_processing.feature_extraction.smsa```       |             |
-|     P4     |                            $P_4 = \sqrt{\frac{\sum_{n=1}^{N} (x(n))^2}{N}}$                            |              TS Root Mean Square             |        ```damavand.damavand.signal_processing.feature_extraction.rms```       |             |
-|     P5     |                                          $P_5 = \max \|x(n)\|$                                         |                    TS Peak                   |       ```damavand.damavand.signal_processing.feature_extraction.peak```       |             |
-|     P6     |                         $P_6 = \frac{\sum_{n=1}^{N} (x(n)-P_1)^3}{(N-1)P_1^3}$                         |                  TS Skewness                 |                             ```scipy.stats.skew```                            |             |
-|     P7     |                      $P_7 = \sqrt{\frac{\sum_{n=1}^{N} (x(n)-P_1)^4}{(N-1)P_1^4}}$                     |                  TS Kurtosis                 |                           ```scipy.stats.kurtosis```                          |             |
-|     P8     |                                         $P_8 = \frac{p_5}{p_4}$                                        |                TS Crest Factor               |   ```damavand.damavand.signal_processing.feature_extraction.crest_factor```   |             |
-|     P9     |                                         $P_9 = \frac{p_5}{p_3}$                                        |              TS Clearance Factor             | ```damavand.damavand.signal_processing.feature_extraction.clearance_factor``` |             |
-|     P10    |                        $P_{10} = \frac{P_4}{\frac{1}{N}\sum_{n=1}^{N}\|x(n)\|}$                        |                TS Shape Factor               |   ```damavand.damavand.signal_processing.feature_extraction.shape_factor```   |             |
-|     P11    |                        $P_{11} = \frac{P_5}{\frac{1}{N}\sum_{n=1}^{N}\|x(n)\|}$                        |               TS Impulse Factor              |  ```damavand.damavand.signal_processing.feature_extraction.impulse_factor```  |             |
-|     P12    |                                $P_{12} = \frac{\sum_{k=1}^{K} s(k)}{K}$                                |                    FS Mean                   |                                 ```np.mean```                                 |             |
-|     P13    |                      $P_{13} = \sqrt{\frac{\sum_{k=1}^{K} (s(k)-P_{12})^2}{K-1}}$                      |                  FS Variance                 |                                  ```np.var```                                 |             |
-|     P14    |                  $P_{14} = \frac{\sum_{k=1}^{K} (s(k)-P_{12})^3}{K(\sqrt{P_{12}})^3}$                  |                  FS Skewness                 |                             ```scipy.stats.skew```                            |             |
-|     P15    |                       $P_{15} = \frac{\sum_{k=1}^{K} (s(k)-P_{12})^4}{KP_{13}^2}$                      |                  FS Kurtosis                 |                           ```scipy.stats.kurtosis```                          |             |
-|     P16    |                  $P_{16} = \frac{\sum_{k=1}^{K} f_k \cdot s(k)}{\sum_{k=1}^{K} s(k)}$                  |             FS Spectral Centroid             |        ```damavand.damavand.signal_processing.feature_extraction.P16```       |             |
-|     P17    |                 $P_{17} = \sqrt{\frac{\sum_{k=1}^{K} (f_k - P_{16})^2 \cdot s(k)}{K}}$                 |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P17```       |             |
-|     P18    |              $P_{18} = \sqrt{\frac{\sum_{k=1}^{K} f_k^2 \cdot s(k)}{\sum_{k=1}^{K} s(k)}}$             |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P18```       |             |
-|     P19    |        $P_{19} = \sqrt{\frac{\sum_{k=1}^{K} f_k^4 \cdot s(k)}{\sum_{k=1}^{K} f_k^2 \cdot s(k)}}$       |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P19```       |             |
-|     P20    | $P_{20} = \frac{\sum_{k=1}^{K} f_k^2 \cdot s(k)}{\sum_{k=1}^{K} s(k) \sum_{k=1}^{K} f_k^4 \cdot s(k)}$ |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P20```       |             |
-|     P21    |                                    $P_{21} = \frac{P_{17}}{P_{16}}$                                    |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P21```       |             |
-|     P22    |                  $P_{22} = \frac{\sum_{k=1}^{K} (f_k-P_{16})^3 \cdot s(k)}{KP_{17}^3}$                 |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P22```       |             |
-|     P23    |                  $P_{23} = \frac{\sum_{k=1}^{K} (f_k-P_{16})^4 \cdot s(k)}{KP_{17}^4}$                 |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P23```       |             |
-|     P24    |             $P_{24} = \frac{\sum_{k=1}^{K} (f_k-P_{16})^{1/2} \cdot s(k)}{K\sqrt{P_{17}}}$             |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P24```       |             |
+
+### Features to extract
+
+[This study](https://www.sciencedirect.com/science/article/abs/pii/S0888327006002512) introduces 11 time-domain and 13 frequency-domain (24 in total) features for rotating machinery fault diagnosis. Detailed list of them alongside tips on how to extract them using ```feature_extractor(signals, features)``` is included in the table below. It is worth mentioning that $x(n)$, $s(k)$ and $f_k$ correspond to time-domain signal, frequency spectrum and corresponding frequency axis; moreover, TS and FS in the **Description** column stand for time-series and frequency spectra.
+
+| **Number** |                                               **Formula**                                              |                **Description**               |                               **Implementation**                              |
+|:----------:|:------------------------------------------------------------------------------------------------------:|:--------------------------------------------:|:-----------------------------------------------------------------------------:|
+|     P1     |                                  $P_1 = \frac{\sum_{n=1}^{N} x(n)}{N}$                                 |                    TS Mean                   |                                 ```np.mean```                                 |
+|     P2     |                         $P_2 = \sqrt{\frac{\sum_{n=1}^{N} (x(n)-P_1)^2}{N-1}}$                         |             TS Standard Deviation            |                                  ```np.std```                                 |
+|     P3     |                    $P_3 = \left(\frac{\sum_{n=1}^{N} \sqrt{\|x(n)\|}}{N}\right)^{2}$                   | TS Squared Mean of Square Roots of Absolutes |       ```damavand.damavand.signal_processing.feature_extraction.smsa```       |
+|     P4     |                            $P_4 = \sqrt{\frac{\sum_{n=1}^{N} (x(n))^2}{N}}$                            |              TS Root Mean Square             |        ```damavand.damavand.signal_processing.feature_extraction.rms```       |
+|     P5     |                                          $P_5 = \max \|x(n)\|$                                         |                    TS Peak                   |       ```damavand.damavand.signal_processing.feature_extraction.peak```       |
+|     P6     |                         $P_6 = \frac{\sum_{n=1}^{N} (x(n)-P_1)^3}{(N-1)P_1^3}$                         |                  TS Skewness                 |                             ```scipy.stats.skew```                            |
+|     P7     |                      $P_7 = \sqrt{\frac{\sum_{n=1}^{N} (x(n)-P_1)^4}{(N-1)P_1^4}}$                     |                  TS Kurtosis                 |                           ```scipy.stats.kurtosis```                          |
+|     P8     |                                         $P_8 = \frac{p_5}{p_4}$                                        |                TS Crest Factor               |   ```damavand.damavand.signal_processing.feature_extraction.crest_factor```   |
+|     P9     |                                         $P_9 = \frac{p_5}{p_3}$                                        |              TS Clearance Factor             | ```damavand.damavand.signal_processing.feature_extraction.clearance_factor``` |
+|     P10    |                        $P_{10} = \frac{P_4}{\frac{1}{N}\sum_{n=1}^{N}\|x(n)\|}$                        |                TS Shape Factor               |   ```damavand.damavand.signal_processing.feature_extraction.shape_factor```   |
+|     P11    |                        $P_{11} = \frac{P_5}{\frac{1}{N}\sum_{n=1}^{N}\|x(n)\|}$                        |               TS Impulse Factor              |  ```damavand.damavand.signal_processing.feature_extraction.impulse_factor```  |
+|     P12    |                                $P_{12} = \frac{\sum_{k=1}^{K} s(k)}{K}$                                |                    FS Mean                   |                                 ```np.mean```                                 |
+|     P13    |                      $P_{13} = \sqrt{\frac{\sum_{k=1}^{K} (s(k)-P_{12})^2}{K-1}}$                      |                  FS Variance                 |                                  ```np.var```                                 |
+|     P14    |                  $P_{14} = \frac{\sum_{k=1}^{K} (s(k)-P_{12})^3}{K(\sqrt{P_{12}})^3}$                  |                  FS Skewness                 |                             ```scipy.stats.skew```                            |
+|     P15    |                       $P_{15} = \frac{\sum_{k=1}^{K} (s(k)-P_{12})^4}{KP_{13}^2}$                      |                  FS Kurtosis                 |                           ```scipy.stats.kurtosis```                          |
+|     P16    |                  $P_{16} = \frac{\sum_{k=1}^{K} f_k \cdot s(k)}{\sum_{k=1}^{K} s(k)}$                  |             FS Spectral Centroid             |        ```damavand.damavand.signal_processing.feature_extraction.spectral_centroid```       |
+|     P17    |                 $P_{17} = \sqrt{\frac{\sum_{k=1}^{K} (f_k - P_{16})^2 \cdot s(k)}{K}}$                 |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P17```       |
+|     P18    |              $P_{18} = \sqrt{\frac{\sum_{k=1}^{K} f_k^2 \cdot s(k)}{\sum_{k=1}^{K} s(k)}}$             |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P18```       |
+|     P19    |        $P_{19} = \sqrt{\frac{\sum_{k=1}^{K} f_k^4 \cdot s(k)}{\sum_{k=1}^{K} f_k^2 \cdot s(k)}}$       |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P19```       |
+|     P20    | $P_{20} = \frac{\sum_{k=1}^{K} f_k^2 \cdot s(k)}{\sum_{k=1}^{K} s(k) \sum_{k=1}^{K} f_k^4 \cdot s(k)}$ |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P20```       |
+|     P21    |                                    $P_{21} = \frac{P_{17}}{P_{16}}$                                    |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P21```       |
+|     P22    |                  $P_{22} = \frac{\sum_{k=1}^{K} (f_k-P_{16})^3 \cdot s(k)}{KP_{17}^3}$                 |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P22```       |
+|     P23    |                  $P_{23} = \frac{\sum_{k=1}^{K} (f_k-P_{16})^4 \cdot s(k)}{KP_{17}^4}$                 |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P23```       |
+|     P24    |             $P_{24} = \frac{\sum_{k=1}^{K} (f_k-P_{16})^{1/2} \cdot s(k)}{K\sqrt{P_{17}}}$             |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P24```       |
+
+```
+from damavand.damavand.datasets.downloaders import read_addresses, ZipDatasetDownloader
+from damavand.damavand.datasets.digestors import KAIST
+from damavand.damavand.signal_processing.feature_extraction import *
+from damavand.damavand.signal_processing.transformations import fft
+from damavand.damavand.utils import *
+from zipfile import ZipFile
+import os
+import pandas as pd
+import numpy as np
+import scipy
+
+addresses = read_addresses()
+downloader = ZipDatasetDownloader(addresses['KAIST'])
+downloader.download_extract('KAIST.zip', 'KAIST/')
+
+# using only two channels out of four available ones to avoid RAM oveflow
+kaist = KAIST('KAIST/', os.listdir('KAIST/'), list(range(2)))
+mining_params = {
+    'win_len': 20000,
+    'hop_len': 20000,
+}
+kaist.mine(mining_params)
+
+df = pd.concat(kaist.data[0]).reset_index(drop = True)
+signals, metadata = df.iloc[:, : - 3], df.iloc[:, - 3 :]
+
+time_features = {
+  'mean': (np.mean, (), {}),
+  'std': (np.std, (), {}),
+  'smsa': (smsa, (), {}),
+  'rms': (rms, (), {}),
+  'peak': (peak, (), {}),
+  'skew': (scipy.stats.skew, (), {}),
+  'kurtosis': (scipy.stats.kurtosis, (), {}),
+  'crest_factor': (crest_factor, (), {}),
+  'clearance_factor': (clearance_factor, (), {}),
+  'shape_factor': (shape_factor, (), {}),
+  'impulse_factor': (impulse_factor, (), {}),
+}
+time_features_df = feature_extractor(signals, features)
+
+window = scipy.signal.windows.hann(signals_env.shape[1])
+freq_filter = scipy.signal.butter(25, [5, 12500], 'bandpass', fs = 25600, output='sos')
+signals_fft = fft(signals, freq_filter = freq_filter, window = window)
+freq_axis = fft_freq_axis(20000, 25600)
+
+freq_features = {
+  'mean': (np.mean, (), {}),
+  'var': (np.var, (), {}),
+  'skew': (scipy.stats.skew, (), {}),
+  'kurtosis': (scipy.stats.kurtosis, (), {}),
+  'spectral_centroid': (spectral_centroid, (freq_axis,), {}),
+  'P17': (P17, (freq_axis,), {}),
+  'P18': (P18, (freq_axis,), {}),
+  'P19': (P19, (freq_axis,), {}),
+  'P20': (P20, (freq_axis,), {}),
+  'P21': (P21, (freq_axis,), {}),
+  'P22': (P22, (freq_axis,), {}),
+  'P23': (P23, (freq_axis,), {}),
+  'P24': (P24, (freq_axis,), {}),
+}
+freq_features_df = feature_extractor(signals, features)
+
+```

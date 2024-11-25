@@ -65,7 +65,7 @@ def spectral_centroid(spectrum, freq_axis):
    return np.sum(np.product(spectrum, freq_axis)) / np.sum(spectrum)
 
 def P17(spectrum, freq_axis):
-   return np.sqrt(np.mean(np.product(np.square(np.subtract(freq_axis, P16(spectrum, freq_axis))), spectrum)))
+   return np.sqrt(np.mean(np.product(np.square(np.subtract(freq_axis, spectral_centroid(spectrum, freq_axis))), spectrum)))
 
 def P18(spectrum, freq_axis):
    return np.sqrt(np.sum(np.product(np.square(freq_axis), spectrum)) / np.sum(spectrum))
@@ -77,13 +77,13 @@ def P20(spectrum, freq_axis):
    return np.sum(np.product(np.square(freq_axis), spectrum)) / np.sqrt(np.product(np.sum(spectrum), np.sum(np.product(np.power(freq_axis, 4), spectrum))))
 
 def P21(spectrum, freq_axis):
-   return P17(spectrum, freq_axis) / P16(spectrum, freq_axis)
+   return P17(spectrum, freq_axis) / spectral_centroid(spectrum, freq_axis)
 
 def P22(spectrum, freq_axis):
-   return np.mean(np.product(np.power(np.subtract(freq_axis, P16(spectrum, freq_axis)), 3), spectrum)) / np.power(P17(spectrum, freq_axis), 3)
+   return np.mean(np.product(np.power(np.subtract(freq_axis, spectral_centroid(spectrum, freq_axis)), 3), spectrum)) / np.power(P17(spectrum, freq_axis), 3)
 
 def P23(spectrum, freq_axis):
-   return np.mean(np.product(np.power(np.subtract(freq_axis, P16(spectrum, freq_axis)), 4), spectrum)) / np.power(P17(spectrum, freq_axis), 4)
+   return np.mean(np.product(np.power(np.subtract(freq_axis, spectral_centroid(spectrum, freq_axis)), 4), spectrum)) / np.power(P17(spectrum, freq_axis), 4)
 
 def P24(spectrum, freq_axis):
-   return np.mean(np.product(np.sqrt(np.subtract(freq_axis, P16(spectrum, freq_axis))), spectrum)) / np.sqrt(P17(spectrum, freq_axis))
+   return np.mean(np.product(np.sqrt(np.subtract(freq_axis, spectral_centroid(spectrum, freq_axis))), spectrum)) / np.sqrt(P17(spectrum, freq_axis))

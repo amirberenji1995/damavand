@@ -3,22 +3,24 @@ import pandas as pd
 
 def gaussian_noise(signals, SNR_level, return_noise = False):
   
-  def noise_adder(row, SNR_level):
+  def noise_genaretor(row, SNR_level):
 
     signal_power = np.sum(np.square(row))
     noise_power = signal_power / np.power(10, (SNR_level/10))
     noise = np.random.normal(0, np.sqrt(noise_power), row.shape)
-    noisy_row = row + noise
-
-    return noisy_row
+    
+    return noise
   
-  noise_augmentations = []
+  noises = []
   noisy_records = []
   for index, row in signals.iterrows():
-      noisy_records.append(noise_adder(row, SNR_level))
+    noise = noise_genaretor(row, SNR_level)
+    noises.append(noise)
+    noisy_records.append(row + noise)
+
 
   if return_noise:
-    return pd.DataFrame(noisy_records), pd.DataFrame(noise_augmentations)
+    return pd.DataFrame(noisy_records), pd.DataFrame(noises)
   else:
     return pd.DataFrame(noisy_records)
   

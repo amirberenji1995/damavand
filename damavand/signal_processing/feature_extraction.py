@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
 
-def extract_features(signals, features):
+def feature_extractor(signals, features):
     """
-    extract_features(signals, features) - Extracting features from input signals
+    feature_extractor(signals, features) - Extracting features from input signals
 
     Arguments:
     signals -- A pd.DataFrame() including signals in its rows
@@ -61,7 +61,7 @@ def impulse_factor(arr):
 
 # Frequency domain features
 
-def P16(spectrum, freq_axis):
+def spectral_centroid(spectrum, freq_axis):
    return np.sum(np.product(spectrum, freq_axis)) / np.sum(spectrum)
 
 def P17(spectrum, freq_axis):

@@ -1,13 +1,13 @@
 import numpy as np
 import pandas as pd
 
-def gaussian_noise(signals, SNR_level, noise_mean = 0, return_noise = False):
+def gaussian_noise(signals, SNR_level, return_noise = False):
   
-  def noise_adder(row, SNR_level, noise_mean):
+  def noise_adder(row, SNR_level):
 
     signal_power = np.sum(np.square(row))
     noise_power = signal_power / np.power(10, (SNR_level/10))
-    noise = np.random.normal(noise_mean, np.sqrt(noise_power), row.shape)
+    noise = np.random.normal(0, np.sqrt(noise_power), row.shape)
     noisy_row = row + noise
 
     return noisy_row

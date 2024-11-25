@@ -18,9 +18,9 @@ The image below, illustrates an overview of the Damavand.
 ![Damavand Overview](damavand_overview.jpg)
 
 Detailed API reference of each module is accessible through the links, below:
-- [**utils**](documentation/utils.md)
-- [**signal_processing**](documentation/signal_processing.md)
-- [**datasets**](documentation/datasets.md)
+- [**utils**](documentations/utils.md)
+- [**signal_processing**](documentations/signal_processing.md)
+- [**datasets**](documentations/datasets.md)
 
 
 Available datasets are listed in the table below:

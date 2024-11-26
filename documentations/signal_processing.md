@@ -133,6 +133,7 @@ To extract a set of features from the signals presented in a ```pandas.DataFrame
 |     P24    |             $P_{24} = \frac{\sum_{k=1}^{K} (f_k-P_{16})^{1/2} \cdot s(k)}{K\sqrt{P_{17}}}$             |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P24```       |
 
 ```Python
+# Importings
 from damavand.damavand.datasets.downloaders import read_addresses, ZipDatasetDownloader
 from damavand.damavand.datasets.digestors import MFPT
 from damavand.damavand.signal_processing.feature_extraction import *
@@ -144,6 +145,7 @@ import pandas as pd
 import numpy as np
 import scipy
 
+# Downloading the MFPT dataset
 addresses = read_addresses()
 downloader = ZipDatasetDownloader(addresses['MFPT'])
 downloader.download_extract('MFPT.zip', 'MFPT/')
@@ -154,15 +156,19 @@ mfpt = MFPT('MFPT/MFPT Fault Data Sets/', [
     '3 - Seven More Outer Race Fault Conditions',
     '4 - Seven Inner Race Fault Conditions',
 ])
+
+# Mining the dataset
 mining_params = {
     97656: {'win_len': 16671, 'hop_len': 2000},
     48828: {'win_len': 8337, 'hop_len': 1000},
 }
 mfpt.mine(mining_params)
 
+# Signal/Metadata split
 df = pd.concat(mfpt.data[48828]).reset_index(drop = True)
 signals, metadata = df.iloc[:, : - 4], df.iloc[:, - 4 :]
 
+# Extracting time-domain features
 time_features = {
   'mean': (np.mean, (), {}),
   'std': (np.std, (), {}),
@@ -178,11 +184,13 @@ time_features = {
 }
 time_features_df = feature_extractor(signals, time_features)
 
+# Applying the FFT to transform data into frequency-domain
 window = scipy.signal.windows.hann(signals.shape[1])
 freq_filter = scipy.signal.butter(25, [5, 12500], 'bandpass', fs = 25600, output='sos')
 signals_fft = fft(signals, freq_filter = freq_filter, window = window)
 freq_axis = fft_freq_axis(20000, 25600)
 
+# Extracting frequency-domain features
 freq_features = {
   'mean': (np.mean, (), {}),
   'var': (np.var, (), {}),
@@ -199,5 +207,4 @@ freq_features = {
   'P24': (P24, (freq_axis,), {}),
 }
 freq_features_df = feature_extractor(signals, freq_features)
-
 ```

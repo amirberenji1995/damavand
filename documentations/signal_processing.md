@@ -1,6 +1,8 @@
 # Damavand Documention - Signal Processing Module API Reference
+Signal processing is of great importance in rotating machinery condition monitoring. On this page, we go through both submodules of the signal processing module: 1)Transformations and 2)Feature extraction. While the former is focused around the application of signal processing transformations (e.g. [Hilbert Transform](https://en.wikipedia.org/wiki/Hilbert_transform), [Discrete Fourier Transform](https://en.wikipedia.org/wiki/Discrete_Fourier_transform) and ...) to process the raw time-series, the latter is developed around the extraction of hand-crafted features.
 
 ## Transformations Submodule
+In this section, we discuss various signal processing transformations that are available.
 
 ### ```env(signals)```
 
@@ -214,6 +216,8 @@ signals_env_STFT = stft(signals_env, 2400, 200, STFT_freq_filter, STFT_window)
 
 ## Feature Extraction Submodule
 
+Hand-crafted features (from both time and frequency domains) are widely used for rotating machinery conidition monitoring. This submodule, facilitates the extraction of such features from raw (time and frequency) data. We first introduce ```feature_extractor(signals, features)``` function that enables one to extract various functions from raw data ```pd.DataFrame```s, at once. Next, a comprehensive list of features to extract are introduced; last but not least, a code snippet to extract these features is provided.
+
 ### ```feature_extractor(signals, features)```
 
 #### Extracting a number of features from the inpuuted signals
@@ -242,7 +246,7 @@ To extract a set of features from the signals presented in a ```pandas.DataFrame
 
 ### Features to extract
 
-[This study](https://www.sciencedirect.com/science/article/abs/pii/S0888327006002512) introduces 11 time-domain and 13 frequency-domain (24 in total) features for rotating machinery fault diagnosis. Detailed list of them alongside tips on how to extract them using ```feature_extractor(signals, features)``` is included in the table below. It is worth mentioning that $x(n)$, $s(k)$ and $f_k$ correspond to time-domain signal, frequency spectrum and corresponding frequency axis; moreover, TS and FS in the **Description** column stand for time-series and frequency spectra.
+[This study](https://www.sciencedirect.com/science/article/abs/pii/S0888327006002512) introduces 11 time-domain and 13 frequency-domain (24 in total) features for rotating machinery fault diagnosis. Detailed list of them alongside tips on how to extract them using ```feature_extractor(signals, features)``` is included in the table below. It is worth mentioning that $x(n)$, $s(k)$ and $f_k$ correspond to time-domain signal, frequency spectrum and corresponding frequency axis; moreover, TS and FS in the **Description** column stand for time-series and frequency spectra. For detailed example on how to extract these features using ```feature_extractor(signals, features)```, checkout the code snippet below the table.
 
 | **Number** |                                               **Formula**                                              |                **Description**               |                               **Implementation**                              |
 |:----------:|:------------------------------------------------------------------------------------------------------:|:--------------------------------------------:|:-----------------------------------------------------------------------------:|
@@ -270,6 +274,9 @@ To extract a set of features from the signals presented in a ```pandas.DataFrame
 |     P22    |                  $P_{22} = \frac{\sum_{k=1}^{K} (f_k-P_{16})^3 \cdot s(k)}{KP_{17}^3}$                 |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P22```       |
 |     P23    |                  $P_{23} = \frac{\sum_{k=1}^{K} (f_k-P_{16})^4 \cdot s(k)}{KP_{17}^4}$                 |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P23```       |
 |     P24    |             $P_{24} = \frac{\sum_{k=1}^{K} (f_k-P_{16})^{1/2} \cdot s(k)}{K\sqrt{P_{17}}}$             |                                              |        ```damavand.damavand.signal_processing.feature_extraction.P24```       |
+
+### Example on using ```feature_extractor(signals, features)``` to extract features
+The code snippet below, explains the feature extraction from both time and frequency domains, comprehensively.
 
 ```Python
 # Importings

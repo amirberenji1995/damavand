@@ -178,7 +178,7 @@ time_features = {
 }
 time_features_df = feature_extractor(signals, time_features)
 
-window = scipy.signal.windows.hann(signals_env.shape[1])
+window = scipy.signal.windows.hann(signals.shape[1])
 freq_filter = scipy.signal.butter(25, [5, 12500], 'bandpass', fs = 25600, output='sos')
 signals_fft = fft(signals, freq_filter = freq_filter, window = window)
 freq_axis = fft_freq_axis(20000, 25600)

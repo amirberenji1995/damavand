@@ -50,7 +50,7 @@ def peak(arr):
 def crest_factor(arr):
    return peak(arr) / rms(arr)
 
-def clearence_factor(arr):
+def clearance_factor(arr):
    return peak(arr) / smsa(arr)
 
 def shape_factor(arr):

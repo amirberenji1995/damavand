@@ -134,7 +134,7 @@ To extract a set of features from the signals presented in a ```pandas.DataFrame
 
 ```Python
 from damavand.damavand.datasets.downloaders import read_addresses, ZipDatasetDownloader
-from damavand.damavand.datasets.digestors import KAIST
+from damavand.damavand.datasets.digestors import MFPT
 from damavand.damavand.signal_processing.feature_extraction import *
 from damavand.damavand.signal_processing.transformations import fft
 from damavand.damavand.utils import *
@@ -145,19 +145,23 @@ import numpy as np
 import scipy
 
 addresses = read_addresses()
-downloader = ZipDatasetDownloader(addresses['KAIST'])
-downloader.download_extract('KAIST.zip', 'KAIST/')
+downloader = ZipDatasetDownloader(addresses['MFPT'])
+downloader.download_extract('MFPT.zip', 'MFPT/')
 
-# using only two channels out of four available ones to avoid RAM oveflow
-kaist = KAIST('KAIST/', os.listdir('KAIST/'), list(range(2)))
+mfpt = MFPT('MFPT/MFPT Fault Data Sets/', [
+    '1 - Three Baseline Conditions',
+    '2 - Three Outer Race Fault Conditions',
+    '3 - Seven More Outer Race Fault Conditions',
+    '4 - Seven Inner Race Fault Conditions',
+])
 mining_params = {
-    'win_len': 20000,
-    'hop_len': 20000,
+    97656: {'win_len': 16671, 'hop_len': 2000},
+    48828: {'win_len': 8337, 'hop_len': 1000},
 }
-kaist.mine(mining_params)
+mfpt.mine(mining_params)
 
-df = pd.concat(kaist.data[0]).reset_index(drop = True)
-signals, metadata = df.iloc[:, : - 3], df.iloc[:, - 3 :]
+df = pd.concat(mfpt.data[48828]).reset_index(drop = True)
+signals, metadata = df.iloc[:, : - 4], df.iloc[:, - 4 :]
 
 time_features = {
   'mean': (np.mean, (), {}),
@@ -172,7 +176,7 @@ time_features = {
   'shape_factor': (shape_factor, (), {}),
   'impulse_factor': (impulse_factor, (), {}),
 }
-time_features_df = feature_extractor(signals, features)
+time_features_df = feature_extractor(signals, time_features)
 
 window = scipy.signal.windows.hann(signals_env.shape[1])
 freq_filter = scipy.signal.butter(25, [5, 12500], 'bandpass', fs = 25600, output='sos')
@@ -194,6 +198,6 @@ freq_features = {
   'P23': (P23, (freq_axis,), {}),
   'P24': (P24, (freq_axis,), {}),
 }
-freq_features_df = feature_extractor(signals, features)
+freq_features_df = feature_extractor(signals, freq_features)
 
 ```

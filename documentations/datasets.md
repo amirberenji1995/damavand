@@ -310,7 +310,7 @@ cwru.mine(mining_params, synchronous_only = True)
 
 ### ```SEU```
 
-#### A digestor to mine the gearbox dataset from Southeast University
+#### A digestor to mine the gearbox dataset from Southeast University (SEU)
 
 - ##### Original title: **Gearbox dataset** from Highly Accurate Machine Fault Diagnosis Using Deep Transfer Learning
 
@@ -393,7 +393,7 @@ mafaulda.mine(mining_params)
 
 ### ```MEUT```
 
-#### A digestor to mine the dataset by Mehran University of Engineering & Technology
+#### A digestor to mine the dataset by Mehran University of Engineering & Technology (MEUT)
 
 - ##### Original title: Triaxial bearing vibration dataset of induction motor under varying load conditions
 
@@ -437,7 +437,7 @@ dataset.mine(mining_params)
 
 ### ```UoO```
 
-#### A digestor to mine the bearing dataset from University of Ottawa
+#### A digestor to mine the bearing dataset from University of Ottawa (UoO)
 
 - ##### Original title: Bearing vibration data collected under time-varying rotational speed conditions
 
@@ -478,7 +478,7 @@ dataset.mine(mining_params)
 
 ### ```PU```
 
-#### A digestor to mine the bearing dataset by Paderborn University
+#### A digestor to mine the bearing dataset by Paderborn University (PU)
 
 - #### Original title: Condition Monitoring of Bearing Damage in Electromechanical Drive Systems by Using Motor Current Signals of Electric Motors: A Benchmark Data Set for Data-Driven Classification
 

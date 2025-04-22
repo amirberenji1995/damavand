@@ -132,7 +132,7 @@ def amplitude_shifting(signals, coefficients):
   
   return signals * coefficients
 
-def resampler(signals, target_len):
+def resampling(signals, target_len):
   """
   Resample signals to a target length
 
@@ -148,4 +148,4 @@ def resampler(signals, target_len):
   pd.DataFrame
     Resampled signals
   """
-  return pd.DataFrame(resample(signals.to_numpy(), target_len, axis = 1))
+  return pd.DataFrame(resample(signals, target_len, axis = 1))

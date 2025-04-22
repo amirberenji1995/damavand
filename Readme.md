@@ -1,7 +1,8 @@
 # Damavand
 
-![Damavand Logo](logo_new_cropped.jpg)
-
+<div style="text-align: center;">
+  <img src="logo_new_cropped.jpg" alt="Damavand Logo" style="max-width: 200px; height: auto;">
+</div>
 
 Damavand is a package to simplify rotary machines vibration-based analysis, through standardizing downloading, loading and transforming processes. The main motivation behind developing it is to democratize rotary machine intelligent predictive maintenance, through the development of an end-to-end unified data processing framework, covering from downloading the raw data to data preprocessing.
 

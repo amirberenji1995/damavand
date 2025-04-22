@@ -183,3 +183,53 @@ augmented_signals = amplitude_shifting(signals, 5)
 # Augmenting the first 5 signals by 5 different coefficients
 augmented_signals = amplitude_shifting(signals.iloc[:5, :], [1, 2, 3, 4, 5])
 ```
+
+## ```resampling(signals, target_len)```
+
+
+### Resample signals to a target length
+  
+#### Arguments:
+- **signals** is the Original signals, in the form of a ```pd.DataFrame```.
+- **target_len** the target length of the resampled signals, as an ```int```.
+
+#### Return Values:
+- A ```pandas.DataFrame``` including the resampled signals.
+
+#### Descriptions:
+By this function, one can resample signals to a desired (lower or higher than the original) length.
+
+#### Usage example:
+
+```Python
+# Importings
+from damavand.damavand.datasets.downloaders import read_addresses, ZipDatasetDownloader
+from damavand.damavand.datasets.digestors import MFPT
+from damavand.damavand.augmentations import resampling
+
+# Downloading the MFPT dataset
+addresses = read_addresses()
+downloader = ZipDatasetDownloader(addresses['MFPT'])
+downloader.download_extract('MFPT.zip', 'MFPT/')
+
+mfpt = MFPT('MFPT/MFPT Fault Data Sets/', [
+    '1 - Three Baseline Conditions',
+    '2 - Three Outer Race Fault Conditions',
+    '3 - Seven More Outer Race Fault Conditions',
+    '4 - Seven Inner Race Fault Conditions',
+])
+
+# Mining the dataset
+mining_params = {
+    97656: {'win_len': 16671, 'hop_len': 2000},
+    48828: {'win_len': 8337, 'hop_len': 1000},
+}
+mfpt.mine(mining_params)
+
+# Signal/Metadata split
+df = pd.concat(mfpt.data[48828]).reset_index(drop = True)
+signals, metadata = df.iloc[:, : - 4], df.iloc[:, - 4 :]
+
+# Augmenting the dataset by resampling the original signals (8337 points) to 10000
+signals_upsampled = resampling(signals, 10000)
+```

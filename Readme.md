@@ -4,7 +4,11 @@
   <img src="logo_new_cropped.jpg" alt="Damavand Logo" style="max-width: 200px; height: auto;">
 </div>
 
+## Introduction
+
 Damavand is a package to simplify rotary machines vibration-based analysis, through standardizing downloading, loading and transforming processes. The main motivation behind developing it is to democratize rotary machine intelligent predictive maintenance, through the development of an end-to-end unified data processing framework, covering from downloading the raw data to data preprocessing.
+
+## Anatomy
 
 Damavand currently consists of four modules:
 
@@ -19,12 +23,7 @@ The image below, illustrates an overview of the Damavand.
 
 ![Damavand Overview](damavand_overview.jpg)
 
-Detailed API reference of each module is accessible through the links, below:
-- [**utils**](documentations/utils.md)
-- [**signal_processing**](documentations/signal_processing.md)
-- [**datasets**](documentations/datasets.md)
-- [**augmentations**](documentations/augmentations.md)
-
+## Datasets
 
 Available datasets are listed in the table below:
 
@@ -40,3 +39,63 @@ Available datasets are listed in the table below:
 |    PU    |         64         |               Variable              |                             Yes (rotational speed load torque radial force )                            |  Normal Bearing inner race Bearing outer race Bearing inner/outer race |                           1 Accelerometer 2 Current sensors (measuring phase currents)                           | https://mb.uni-paderborn.de/kat/forschung/kat-datacenter/bearing-datacenter/data-sets-and-download                         |
 
 In the above table, $F_s$, BIR, BOR, M, U, BBP, BIO, UHB, OHB and BCP correspond to the sampling frequency, bearing inner race fault, bearing outer race fault, misalignment, unbalance, bearing ball problem, combinatory inner and outer races fault, underhang bearing, overhang bearing and bearing cage problem.
+
+## Installation
+
+Currently, Damavand is accessible through the official Github repository, as below:
+
+```bash
+git clone https://github.com/amirberenji1995/damavand
+```
+
+Once the repository is cloned, install the dependencies as below:
+
+```bash
+pip install -r damavand/requirements.txt
+```
+
+## Quickstart
+
+Once the package is installed, its whole functionality is accessible; the code snippet below, demonstrate a simple usage scenario, where a dataset is downloaded, loaded and processed.
+
+```Python
+# Importings
+from damavand.damavand.datasets.downloaders import read_addresses, ZipDatasetDownloader
+from damavand.damavand.datasets.digestors import UoO
+import pandas as pd
+
+# Downloading the dataset
+addresses = read_addresses() # reading the addresses
+downloader = ZipDatasetDownloader(addresses['UoO']) # instantiating the downloader to download the UoO dataset (https://data.mendeley.com/datasets/v43hmbwxpm/1)
+downloader.download_extract('UoO.zip', 'UoO/')  # downloading and extracting the dataset
+
+# Mining the dataset
+dataset = UoO('UoO/', ['Channel_1', 'Channel_2'], [1]) # instantiating the dataset
+mining_params = {'win_len': 10000, 'hop_len': 10000} # defining the mining parameters
+dataset.mine(mining_params) # mining the dataset
+
+# Aggregating the mined data over the first channel
+df = pd.concat(dataset.data['Channel_1']).reset_index(drop = True)
+
+# Signal/Metadata split
+signals, metadata = df.iloc[:, : -3], df.iloc[:, -3 :] # last three columns are state, loading and repetition; therefore, they are excluded into metadata
+```
+
+## Documentation
+
+Detailed API reference of each module is accessible through the links, below:
+- [**utils**](documentations/utils.md)
+- [**signal_processing**](documentations/signal_processing.md)
+- [**datasets**](documentations/datasets.md)
+- [**augmentations**](documentations/augmentations.md)
+
+## Demonstrations and Tutorials
+
+For each dataset available in this package, a detailed demonstration is provided that includes downloading, mining and time-domain visualization. These demonstrations can be found [here](https://github.com/amirberenji1995/damavand/tree/main/dataset_demonstrations).
+
+Additionally, following tutorials are provided:
+
+1. [Signal Processing 101]()
+2. [How to develop a digestor for a custom dataset?]()
+3. [Anomaly detection]()
+6. [Health state classification]()

@@ -97,5 +97,13 @@ Additionally, following tutorials are provided:
 
 1. [Signal Processing 101]()
 2. [How to develop a digestor for a custom dataset?]()
-3. [Anomaly detection]()
-6. [Health state classification]()
+3. [How to develop a custom feature to extract?]()
+4. [Anomaly detection]()
+5. [Health state classification]()
+
+## License
+
+
+
+## Cite
+

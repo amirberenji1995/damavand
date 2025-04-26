@@ -8,12 +8,26 @@
 
 Damavand is a package to simplify rotary machines vibration-based analysis, through standardizing downloading, loading and transforming processes. The main motivation behind developing it is to democratize rotary machine intelligent predictive maintenance, through the development of an end-to-end unified data processing framework, covering from downloading the raw data to data preprocessing.
 
+## Terminology and Lifecycle
+
+Damavand simplifies the development of an Extract-Transform-Load (ETL) pipeline for a rich collection of benchmark rotary machines dataset; followings are the essential steps of such pipelines:
+
+1. **Downloading the dataset**: datasets are downloadable using either custom or general *downloaders*.
+2. **Digesting the downloaded dataset**: *digestors* are responsible for processing the raw dataset files into structured pairs of signal banks and their corresponding metadata.
+3. **Application of signal processing**: *signal processing tehcniques* are employed to process and enrich the signal banks, for the downstream analysis.
+
+The image below, illustrates the lifecycle of a Damavand pipeline. As highlighted in the image, employment of Damavand makes the development of ETL pipelines highly repeatable, resulting in faster iterative trials.
+
+![Damavand Lifecycle](Lifecycle.jpg)
+
+It is worth mentioning that we do not regard data augmentation as an essential step of the pipeline; therefore, we have not included that in this section; complementary explanations on data augmentation using Damavand is provided late on this page.
+
 ## Anatomy
 
 Damavand currently consists of four modules:
 
 - **utils**: a submodule to include genral and basic functions
-- **signal_processing**: implementation of the most frequently-used signal processing operations and transforms used for vibration analysis
+- **signal_processing**: implementation of the most frequently-used signal processing transforms and features used for vibration analysis
 - **datasets**: this submodule consists of two parts:
     * **downloaders**: helping classes to download benchmark datasets
     * **digestors**: helping classes to process raw dataset files into structured pairs of signal banks and their corresponding metadata
@@ -103,6 +117,13 @@ Additionally, following tutorials are provided:
 
 ## License
 
+
+## Next steps
+
+We highly encourage our developers to help in extending the Damavand, particularly in the following directions:
+
+1. Adding new datasets
+2. Adding new signal processing methods
 
 
 ## Cite

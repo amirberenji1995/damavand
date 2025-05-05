@@ -211,7 +211,7 @@ signals, metadata = df.iloc[:, : - 4], df.iloc[:, - 4 :]
 # Time-Frequency spectrograms extraction, through stft
 STFT_window = scipy.signal.windows.hann(2400)
 STFT_freq_filter = scipy.signal.butter(25, [5, 23500], 'bandpass', fs = float(metadata.iloc[0, 0]), output='sos')
-signals_env_STFT = stft(signals_env, 2400, 200, STFT_freq_filter, STFT_window)
+signal_STFT = stft(signals, 2400, 200, STFT_freq_filter, STFT_window)
 ```
 
 ## Feature Extraction Submodule
@@ -334,7 +334,7 @@ time_features_df = feature_extractor(signals, time_features)
 window = scipy.signal.windows.hann(signals.shape[1])
 freq_filter = scipy.signal.butter(25, [5, 12500], 'bandpass', fs = 25600, output='sos')
 signals_fft = fft(signals, freq_filter = freq_filter, window = window)
-freq_axis = fft_freq_axis(20000, 25600)
+freq_axis = fft_freq_axis(8337, 48828)
 
 # Extracting frequency-domain features
 freq_features = {
@@ -352,5 +352,5 @@ freq_features = {
   'P23': (P23, (freq_axis,), {}),
   'P24': (P24, (freq_axis,), {}),
 }
-freq_features_df = feature_extractor(signals, freq_features)
+freq_features_df = feature_extractor(signals_fft, freq_features)
 ```

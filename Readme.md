@@ -1,8 +1,8 @@
 # Damavand
 
-<div style="text-align: center;">
-  <img src="logo_new_cropped.jpg" alt="Damavand Logo" style="max-width: 200px; height: auto;">
-</div>
+<p align="center">
+  <img src="logo_new_cropped.jpg" alt="Damavand Logo" width="200">
+</p>
 
 ## Introduction
 
@@ -13,7 +13,7 @@ Damavand is a package to simplify rotary machines vibration-based analysis, thro
 Damavand simplifies the development of an Extract-Transform-Load (ETL) pipeline for a rich collection of benchmark rotary machines dataset; followings are the essential steps of such pipelines:
 
 1. **Downloading the dataset**: datasets are downloadable using either custom or general *downloaders*.
-2. **Digesting the downloaded dataset**: *digestors* are responsible for processing the raw dataset files into structured pairs of signal banks and their corresponding metadata.
+2. **Mining the dataset**: *digestors* transform raw dataset files into structured pairs of signals and metadata (**mining** for short).
 3. **Application of signal processing**: *signal processing tehcniques* are employed to process and enrich the signal banks, for the downstream analysis.
 
 The image below, illustrates the lifecycle of a Damavand pipeline. As highlighted in the image, employment of Damavand makes the development of ETL pipelines highly repeatable, resulting in faster iterative trials.

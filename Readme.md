@@ -109,11 +109,11 @@ For each dataset available in this package, a detailed demonstration is provided
 
 Additionally, following tutorials are provided:
 
-1. [Signal Processing 101]()
-2. [How to develop a digestor for a custom dataset?]()
-3. [How to develop a custom feature to extract?]()
-4. [Anomaly detection]()
-5. [Health state classification]()
+1. [Signal Processing 101](tutorials/signal_processing_101.ipynb)
+2. [How to develop a digestor for a custom dataset?](tutorials/custom_digestor_development.ipynb)
+3. [How to develop a custom feature to extract?](tutorials/custom_feature_extraction.ipynb)
+4. Anomaly detection (Comming soon!)
+5. [Health state classification](tutorials/Classification_demo.ipynb)
 
 ## License
 

@@ -1,7 +1,7 @@
 # Damavand
 
 <p align="center">
-  <img src="logo_new_cropped.jpg" alt="Damavand Logo" width="200">
+  <img src="logo_new_cropped.jpg" alt="Damavand Logo" width="300">
 </p>
 
 ## Introduction
@@ -117,10 +117,15 @@ Additionally, following tutorials are provided:
 
 ## License
 
+Damavand is dual-licensed:
+
+* **For non-commercial use:** Damavand is available under the $$\red{[???]}$$ License. This allows researchers, educators, and individual users to freely use, modify, and distribute the software for non-profit academic research, educational purposes, and personal projects. See the $$\red{[LICENSE file](LICENSE)}$$ for the full terms.
+
+* **For commercial or enterprise use:** Use of Damavand within a commercial product or for internal business operations in a for-profit organization requires a commercial license. Please contact ahberenji@gmail.com for commercial licensing inquiries and terms.
 
 ## Next steps
 
-We highly encourage our developers to help in extending the Damavand, particularly in the following directions:
+We highly encourage other developers to help in extending the Damavand, particularly in the following directions:
 
 1. Adding new datasets
 2. Adding new signal processing methods

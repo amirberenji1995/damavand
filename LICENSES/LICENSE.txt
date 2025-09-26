@@ -1,0 +1,13 @@
+Damavand is dual-licensed:
+
+Non-Commercial Use
+Damavand is available under the [PolyForm Noncommercial License 1.0.0](LICENSE).
+This license allows researchers, educators, and individual users to freely use,
+modify, and share the software for non-profit academic research, educational purposes,
+and personal projects.
+
+Commercial Use
+For use of Damavand within a commercial product or for internal business operations
+in a for-profit organization, a separate **commercial license** is required.
+Please contact [ahberenji@gmail.com](mailto:ahberenji@gmail.com) to discuss
+commercial licensing terms.

@@ -1,0 +1,97 @@
+Copyright (c) 2025 Amirhossein Berenji
+Copyright (c) 2025 Zahra Taghiyarrenani
+
+PolyForm Noncommercial License 1.0.0
+
+Acceptance
+
+In order to get any license under these terms, you must agree
+to them as both strict obligations and conditions to all
+your licenses.
+
+Copyright License
+
+The licensor grants you a copyright license for the
+software to do everything you might do with the software
+that would otherwise infringe the licensor’s copyright
+in it for any permitted purpose.  However, you may
+only distribute the software according to [Distribution
+License](#distribution-license) and make changes or new works
+based on the software according to [Changes and New Works
+License](#changes-and-new-works-license).
+
+Distribution License
+
+The licensor grants you an additional copyright license
+to distribute copies of the software.  Your license
+to distribute covers distributing the software with
+changes and new works permitted by the [Changes and New Works
+License](#changes-and-new-works-license).
+
+Changes and New Works License
+
+The licensor grants you an additional copyright license to
+make changes and new works based on the software.
+
+Noncommercial Purposes
+
+Any noncommercial purpose is a permitted purpose.
+
+Personal use for research, experiment, and testing for
+personal benefit, educational purposes, and non-profit
+academic research are all noncommercial purposes.
+
+You may not use the software for a purpose directed toward
+commercial advantage or monetary compensation.
+
+Notices
+
+You must ensure that anyone who gets a copy of any part of
+the software from you also gets a copy of these terms or the
+URL for them.
+
+If you distribute copies of the software, you must not remove
+any copyright, patent, trademark, or attribution notices,
+and you must give all recipients a copy of this license.
+
+Excuse
+
+If the licensor cannot fulfill any of its obligations under
+these terms because of a circumstance beyond its control,
+it will be excused for that failure.
+
+Patent Defense
+
+If you make any written claim that the software infringes or
+contributes to infringement of any patent, your patent
+license for the software granted under these terms ends
+immediately. If your organization makes such a claim, your
+patent license ends immediately for work on behalf of your
+organization.
+
+Violations
+
+The license granted here ends immediately if you breach any
+of its terms.
+
+No Other Rights
+
+These terms do not imply any licenses other than those
+expressly granted in these terms.
+
+Termination
+
+If your license ends, you must stop all use and distribution
+of the software.
+
+No Liability
+
+As far as the law allows, the software comes as is, without
+any warranty or condition, and the licensor will not be
+liable to you for any damages arising out of these terms or
+the use or nature of the software, under any kind of legal
+claim.
+
+---
+
+This license is from the PolyForm Project: https://polyformproject.org/licenses/noncommercial/1.0.0/

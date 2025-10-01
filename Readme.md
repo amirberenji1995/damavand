@@ -59,7 +59,7 @@ In the above table, $F_s$, BIR, BOR, M, U, BBP, BIO, UHB, OHB and BCP correspond
 Currently, Damavand is accessible through the official Github repository, as below:
 
 ```bash
-git clone https://github.com/amirberenji1995/damavand
+git clone https://github.com/pydamavand/damavand
 ```
 
 Once the repository is cloned, install the dependencies as below:
